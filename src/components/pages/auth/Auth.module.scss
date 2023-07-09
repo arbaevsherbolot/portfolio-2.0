@@ -62,7 +62,7 @@
           }
 
           &::placeholder {
-            color: #c3c6ce;
+            color: #e7e8ea;
           }
 
           &.password {
@@ -82,6 +82,10 @@
           transform: translateY(-50%);
 
           cursor: pointer;
+
+          @media (max-width: 955px) {
+            cursor: default;
+          }
         }
       }
     }

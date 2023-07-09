@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google_svg from "../../../../assets/svg/google.svg";
 import show_svg from "../../../../assets/svg/show.svg";
 import hide_svg from "../../../../assets/svg/hide.svg";
@@ -7,11 +7,13 @@ import styles from "../Auth.module.scss";
 
 const Login = () => {
   const [togglePassword, setTogglePassword] = useState(false);
-
   const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   document.title = "Регистрация";
 
@@ -51,11 +53,21 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      console.log(data);
+      if (data.password.length < 6 && !data.password) {
+        alert("Password must be at least 6 characters");
+      } else if (!validateEmail(data.email) && !data.email) {
+        alert("Invalid email");
+      }
     } catch (e) {
       alert(`${e.message}`);
     }
   }
+
+  const validateEmail = (el) => {
+    const regex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return regex.test(el);
+  };
 
   return (
     <>
