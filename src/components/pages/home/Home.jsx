@@ -27,6 +27,7 @@ const Home = () => {
             </svg>
           </div>
         </div> */}
+        Home
       </div>
     </>
   );
