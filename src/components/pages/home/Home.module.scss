@@ -1,0 +1,38 @@
+.page_wrapper {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .buttons {
+    display: flex;
+    gap: 0.2rem;
+
+    .button {
+      padding: 0.6rem 1rem;
+
+      background-color: #f9f9f908;
+      border-radius: 2rem 0 0 2rem;
+      border: 1px solid #ffffff1d;
+
+      display: flex;
+      align-items: center;
+
+      cursor: pointer;
+
+      color: #fff;
+
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(0.95);
+        
+      }
+
+      &:nth-child(2) {
+        border-radius: 0 2rem 2rem 0;
+      }
+    }
+  }
+}
