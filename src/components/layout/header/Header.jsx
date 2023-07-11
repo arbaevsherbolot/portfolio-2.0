@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const Header = ({ open }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+
+  // useEffect(() => {
+  //   if (!open) {
+  //     setIsOpen(false);
+  //   }
+  // });
 
   return (
     <>
       <div className={styles.navbar}>
-        <Link to="/" className={`${styles.link} ${styles.button}`}>
-          <div className={styles.logo}>ChinatradeX</div>
+        <Link to="/">
+          <div className={styles.logo}>
+            <img src={logo} alt="Logo" />
+          </div>
         </Link>
 
         <div className={styles.middle}>
@@ -39,7 +49,7 @@ const Header = () => {
             </NavLink>
 
             <div className={styles.order}>
-              <p className={styles.text}>Заказать </p>
+              <p className={styles.text}>Заказать</p>
 
               <div className={styles.dropdown}>
                 <div className={styles.menu}>
@@ -115,6 +125,19 @@ const Header = () => {
               Регистрация
             </Link>
           </div>
+
+          {/* <div className={styles.account}>
+            <div className={styles.logo}>
+              <img
+                src="https://media.licdn.com/dms/image/D4D03AQFIgjoK1rkh6w/profile-displayphoto-shrink_800_800/0/1686734553335?e=2147483647&v=beta&t=T0y-o1tcmDImuepN3HDo_1NQ6b5ZsDznkrXsLJ71hoY"
+                alt="User"
+              />
+            </div>
+            <div className={styles.user}>
+              <h3 className={styles.name}>Sherbolot</h3>
+              <p className={styles.email}>sherbolot@wedevx.co</p>
+            </div>
+          </div> */}
         </div>
 
         <div className={styles.burger_menu}>
@@ -145,7 +168,8 @@ const Header = () => {
                   isActive
                     ? `${styles.link} ${styles.active_link}`
                     : styles.link
-                }>
+                }
+                onClick={() => setIsOpen(!isOpen)}>
                 О компании
               </NavLink>
 
@@ -155,7 +179,8 @@ const Header = () => {
                   isActive
                     ? `${styles.link} ${styles.active_link}`
                     : styles.link
-                }>
+                }
+                onClick={() => setIsOpen(!isOpen)}>
                 Товары
               </NavLink>
 
@@ -165,15 +190,28 @@ const Header = () => {
                   isActive
                     ? `${styles.link} ${styles.active_link}`
                     : styles.link
-                }>
+                }
+                onClick={() => setIsOpen(!isOpen)}>
                 Доставка
               </NavLink>
 
-              {/* <div className={styles.order}>
-                <p className={styles.text}>Заказать </p>
+              <div className={styles.order}>
+                <p
+                  className={styles.text}
+                  onClick={() => {
+                    setIsOpenDropdown(!isOpenDropdown);
+                    setIsOpen(true);
+                  }}>
+                  Заказать
+                </p>
 
-                <div className={styles.dropdown}>
-                  <div className={styles.menu}>
+                <div
+                  className={
+                    isOpenDropdown
+                      ? `${styles.dropdown} ${styles.active}`
+                      : styles.dropdown
+                  }>
+                  <div className={styles.dropdown_menu}>
                     <div className={styles.list}>
                       <NavLink
                         to="/alibaba"
@@ -181,7 +219,11 @@ const Header = () => {
                           isActive
                             ? `${styles.menu_link} ${styles.active}`
                             : styles.menu_link
-                        }>
+                        }
+                        onClick={() => {
+                          setIsOpenDropdown(!isOpenDropdown);
+                          setIsOpen(false);
+                        }}>
                         <h1 className={styles.title}>
                           Alibaba <span>НОВЫЙ</span>
                         </h1>
@@ -196,7 +238,11 @@ const Header = () => {
                           isActive
                             ? `${styles.menu_link} ${styles.active}`
                             : styles.menu_link
-                        }>
+                        }
+                        onClick={() => {
+                          setIsOpenDropdown(!isOpenDropdown);
+                          setIsOpen(false);
+                        }}>
                         <h1 className={styles.title}>1688</h1>
                         <p className={styles.desc}>
                           Оптовая торговая площадка Alibaba
@@ -209,7 +255,11 @@ const Header = () => {
                           isActive
                             ? `${styles.menu_link} ${styles.active}`
                             : styles.menu_link
-                        }>
+                        }
+                        onClick={() => {
+                          setIsOpenDropdown(!isOpenDropdown);
+                          setIsOpen(false);
+                        }}>
                         <h1 className={styles.title}>Taobao</h1>
                         <p className={styles.desc}>
                           Популярная китайская платформа электронной торговли
@@ -223,7 +273,11 @@ const Header = () => {
                           isActive
                             ? `${styles.menu_link} ${styles.active}`
                             : styles.menu_link
-                        }>
+                        }
+                        onClick={() => {
+                          setIsOpenDropdown(!isOpenDropdown);
+                          setIsOpen(false);
+                        }}>
                         <h1 className={styles.title}>Poizon</h1>
                         <p className={styles.desc}>
                           Платформы Alibaba и Poizon
@@ -232,19 +286,36 @@ const Header = () => {
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
 
             <div className={styles.buttons}>
-              <Link to="/login" className={styles.button}>
+              <Link
+                to="/login"
+                className={styles.button}
+                onClick={() => setIsOpen(!isOpen)}>
                 Войти
               </Link>
 
               <Link
                 to="/register"
-                className={`${styles.button} ${styles.active}`}>
+                className={`${styles.button} ${styles.active}`}
+                onClick={() => setIsOpen(!isOpen)}>
                 Регистрация
               </Link>
+
+              {/* <div className={styles.account}>
+                <div className={styles.logo}>
+                  <img
+                    src="https://media.licdn.com/dms/image/D4D03AQFIgjoK1rkh6w/profile-displayphoto-shrink_800_800/0/1686734553335?e=2147483647&v=beta&t=T0y-o1tcmDImuepN3HDo_1NQ6b5ZsDznkrXsLJ71hoY"
+                    alt="User"
+                  />
+                </div>
+                <div className={styles.user}>
+                  <h3 className={styles.name}>Sherbolot</h3>
+                  <p className={styles.email}>sherbolot@wedevx.co</p>
+                </div>
+              </div> */}
             </div>
           </div>
         </div>

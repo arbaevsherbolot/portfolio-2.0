@@ -1,7 +1,7 @@
 .page_wrapper {
   width: 100vw;
   max-width: 1200px;
-  min-height: 80vh;
+  min-height: 85vh;
 
   margin: 0 auto;
 
@@ -23,8 +23,9 @@
 
     .title {
       text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
+
+      font-size: 1.9rem;
+      font-weight: 900;
       color: #1a1a1a;
 
       margin-bottom: 1.2rem;
@@ -126,9 +127,19 @@
 
       cursor: pointer;
 
+      @media (max-width: 815px) {
+        cursor: default;
+      }
+
       font-size: 1rem;
       font-weight: 600;
       color: #fff;
+
+      transition: 0.3s;
+
+      &:hover {
+        background-color: #20252f;
+      }
 
       &.google {
         display: flex;
