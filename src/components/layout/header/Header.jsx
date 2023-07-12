@@ -197,8 +197,8 @@ const Header = ({ open }) => {
                 to="/order"
                 className={({ isActive }) =>
                   isActive
-                    ? `${styles.link} ${styles.active_link}`
-                    : styles.link
+                    ? `${styles.link} ${styles.button} ${styles.active_link}`
+                    : `${styles.link} ${styles.button}`
                 }
                 onClick={() => setIsOpen(!isOpen)}>
                 Заказать

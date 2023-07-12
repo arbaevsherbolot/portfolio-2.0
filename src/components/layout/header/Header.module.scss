@@ -415,6 +415,17 @@
             &.active_link {
               background-color: #fafafa;
             }
+
+            &.button {
+              margin-top: 0.5rem;
+              padding: 0.8rem 1.2rem;
+
+              background-color: #1a1e26;
+
+              text-align: center;
+              font-weight: 500;
+              color: #fff;
+            }
           }
         }
 
