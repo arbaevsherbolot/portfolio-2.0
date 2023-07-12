@@ -282,9 +282,21 @@
 
       .menu_icon {
         position: relative;
-        width: 70px;
-        height: 70px;
+        width: 45px;
+        height: 45px;
         cursor: default;
+
+        border-radius: 50%;
+
+        transition: 0.4s;
+
+        &:hover {
+          background-color: #f5f9fb;
+        }
+
+        &:active {
+          background-color: #ebf1f4;
+        }
 
         .button {
           display: block;
@@ -305,7 +317,7 @@
           right: 0;
           left: 0;
           bottom: 0;
-          width: 30px;
+          width: 26px;
           height: 12px;
         }
 
@@ -345,7 +357,7 @@
         &.active:hover span:last-of-type,
         &:hover .button.active + div span:first-of-type,
         &:hover .button.active + div span:last-of-type {
-          width: 30px;
+          width: 26px;
         }
       }
 
@@ -357,7 +369,7 @@
         max-width: 280px;
 
         position: absolute;
-        top: 60px;
+        top: 63px;
         right: 20px;
         z-index: 20;
 
