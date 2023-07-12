@@ -192,6 +192,10 @@
           margin-left: auto;
           padding: 0.15rem 0.8rem;
 
+          @media (max-width: 1015px) {
+            padding: 0.2rem 0.8rem;
+          }
+
           text-transform: uppercase;
 
           border-radius: 0.4rem;
