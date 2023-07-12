@@ -425,6 +425,10 @@
               text-align: center;
               font-weight: 500;
               color: #fff;
+
+              &:hover {
+                background-color: #20252f;
+              }
             }
           }
         }
