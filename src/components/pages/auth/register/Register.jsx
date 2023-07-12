@@ -53,11 +53,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      if (data.password.length < 6 && !data.password) {
-        alert("Password must be at least 6 characters");
-      } else if (!validateEmail(data.email) && !data.email) {
-        alert("Invalid email");
-      }
+      if (
+        (data.password && data.password.length < 6) ||
+        data.password.length > 8
+      ) {
+        alert("Пароль должен состоять не менее чем из 6 символов");
+      } else if (!validateEmail(data.email)) {
+        alert("Недействительный адрес электронной почты");
+      } else console.log(data);
     } catch (e) {
       alert(`${e.message}`);
     }
@@ -76,26 +79,28 @@ const Login = () => {
           <h2 className={styles.title}>Регистрация</h2>
 
           <div className={styles.inputs}>
-            <div className={styles.input_wrapper}>
-              <input
-                required
-                type="text"
-                autoComplete="false"
-                placeholder="Введите имя*"
-                className={styles.input}
-                onChange={handleChangeFirstName}
-              />
-            </div>
+            <div className={styles.cupple_inputs_container}>
+              <div className={styles.input_wrapper}>
+                <input
+                  required
+                  type="text"
+                  autoComplete="false"
+                  placeholder="Введите имя*"
+                  className={styles.input}
+                  onChange={handleChangeFirstName}
+                />
+              </div>
 
-            <div className={styles.input_wrapper}>
-              <input
-                required
-                type="text"
-                autoComplete="false"
-                placeholder="Введите фамилию*"
-                className={styles.input}
-                onChange={handleChangeLastName}
-              />
+              <div className={styles.input_wrapper}>
+                <input
+                  required
+                  type="text"
+                  autoComplete="false"
+                  placeholder="Введите фамилию*"
+                  className={styles.input}
+                  onChange={handleChangeLastName}
+                />
+              </div>
             </div>
 
             <div className={styles.input_wrapper}>

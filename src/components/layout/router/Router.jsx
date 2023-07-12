@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../../pages/home/Home";
 import Login from "../../pages/auth/login/Login";
 import Register from "../../pages/auth/register/Register";
+import Profile from "../../pages/profile/Profile";
 
 const Router = () => {
   const routes = [
@@ -17,6 +18,10 @@ const Router = () => {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
   ];
 

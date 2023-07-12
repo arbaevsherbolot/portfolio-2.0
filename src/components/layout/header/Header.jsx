@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import arrow_icon from "../../../assets/svg/arrow.svg";
 import styles from "./Header.module.scss";
+import Account from "../../acoount/Account.component";
 
 const Header = ({ open }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
-  // useEffect(() => {
-  //   if (!open) {
-  //     setIsOpen(false);
-  //   }
-  // });
+  useEffect(() => {
+    if (!open) {
+      setIsOpen(false);
+    }
+  });
 
   return (
     <>
@@ -49,13 +50,18 @@ const Header = ({ open }) => {
             </NavLink>
 
             <div className={styles.order}>
-              <p className={styles.text}>Заказать</p>
+              <div className={styles.text}>
+                Заказать
+                <div className={styles.arrow}>
+                  <img src={arrow_icon} alt=">" />
+                </div>
+              </div>
 
               <div className={styles.dropdown}>
                 <div className={styles.menu}>
                   <div className={styles.list}>
                     <NavLink
-                      to="/alibaba"
+                      to="/order/alibaba"
                       className={({ isActive }) =>
                         isActive
                           ? `${styles.menu_link} ${styles.active}`
@@ -70,7 +76,7 @@ const Header = ({ open }) => {
                     </NavLink>
 
                     <NavLink
-                      to="/1688"
+                      to="/order/1688"
                       className={({ isActive }) =>
                         isActive
                           ? `${styles.menu_link} ${styles.active}`
@@ -83,7 +89,7 @@ const Header = ({ open }) => {
                     </NavLink>
 
                     <NavLink
-                      to="/taobao"
+                      to="/order/taobao"
                       className={({ isActive }) =>
                         isActive
                           ? `${styles.menu_link} ${styles.active}`
@@ -97,7 +103,7 @@ const Header = ({ open }) => {
                     </NavLink>
 
                     <NavLink
-                      to="/poizon"
+                      to="/order/poizon"
                       className={({ isActive }) =>
                         isActive
                           ? `${styles.menu_link} ${styles.active}`
@@ -114,7 +120,9 @@ const Header = ({ open }) => {
         </div>
 
         <div className={styles.right}>
-          <div className={styles.buttons}>
+          <Account />
+
+          {/* <div className={styles.buttons}>
             <Link to="/login" className={styles.button}>
               Войти
             </Link>
@@ -124,19 +132,6 @@ const Header = ({ open }) => {
               className={`${styles.button} ${styles.active}`}>
               Регистрация
             </Link>
-          </div>
-
-          {/* <div className={styles.account}>
-            <div className={styles.logo}>
-              <img
-                src="https://media.licdn.com/dms/image/D4D03AQFIgjoK1rkh6w/profile-displayphoto-shrink_800_800/0/1686734553335?e=2147483647&v=beta&t=T0y-o1tcmDImuepN3HDo_1NQ6b5ZsDznkrXsLJ71hoY"
-                alt="User"
-              />
-            </div>
-            <div className={styles.user}>
-              <h3 className={styles.name}>Sherbolot</h3>
-              <p className={styles.email}>sherbolot@wedevx.co</p>
-            </div>
           </div> */}
         </div>
 
@@ -158,9 +153,12 @@ const Header = ({ open }) => {
           </div>
 
           <div
+            onClick={(e) => e.stopPropagation()}
             className={
               isOpen ? `${styles.menu} ${styles.active}` : `${styles.menu}`
             }>
+            <Account />
+
             <div className={styles.links}>
               <NavLink
                 to="/about"
@@ -195,101 +193,19 @@ const Header = ({ open }) => {
                 Доставка
               </NavLink>
 
-              <div className={styles.order}>
-                <p
-                  className={styles.text}
-                  onClick={() => {
-                    setIsOpenDropdown(!isOpenDropdown);
-                    setIsOpen(true);
-                  }}>
-                  Заказать
-                </p>
-
-                <div
-                  className={
-                    isOpenDropdown
-                      ? `${styles.dropdown} ${styles.active}`
-                      : styles.dropdown
-                  }>
-                  <div className={styles.dropdown_menu}>
-                    <div className={styles.list}>
-                      <NavLink
-                        to="/alibaba"
-                        className={({ isActive }) =>
-                          isActive
-                            ? `${styles.menu_link} ${styles.active}`
-                            : styles.menu_link
-                        }
-                        onClick={() => {
-                          setIsOpenDropdown(!isOpenDropdown);
-                          setIsOpen(false);
-                        }}>
-                        <h1 className={styles.title}>
-                          Alibaba <span>НОВЫЙ</span>
-                        </h1>
-                        <p className={styles.desc}>
-                          Транснациональный конгломерат электронной коммерции
-                        </p>
-                      </NavLink>
-
-                      <NavLink
-                        to="/1688"
-                        className={({ isActive }) =>
-                          isActive
-                            ? `${styles.menu_link} ${styles.active}`
-                            : styles.menu_link
-                        }
-                        onClick={() => {
-                          setIsOpenDropdown(!isOpenDropdown);
-                          setIsOpen(false);
-                        }}>
-                        <h1 className={styles.title}>1688</h1>
-                        <p className={styles.desc}>
-                          Оптовая торговая площадка Alibaba
-                        </p>
-                      </NavLink>
-
-                      <NavLink
-                        to="/taobao"
-                        className={({ isActive }) =>
-                          isActive
-                            ? `${styles.menu_link} ${styles.active}`
-                            : styles.menu_link
-                        }
-                        onClick={() => {
-                          setIsOpenDropdown(!isOpenDropdown);
-                          setIsOpen(false);
-                        }}>
-                        <h1 className={styles.title}>Taobao</h1>
-                        <p className={styles.desc}>
-                          Популярная китайская платформа электронной торговли
-                          между потребителями платформа
-                        </p>
-                      </NavLink>
-
-                      <NavLink
-                        to="/poizon"
-                        className={({ isActive }) =>
-                          isActive
-                            ? `${styles.menu_link} ${styles.active}`
-                            : styles.menu_link
-                        }
-                        onClick={() => {
-                          setIsOpenDropdown(!isOpenDropdown);
-                          setIsOpen(false);
-                        }}>
-                        <h1 className={styles.title}>Poizon</h1>
-                        <p className={styles.desc}>
-                          Платформы Alibaba и Poizon
-                        </p>
-                      </NavLink>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <NavLink
+                to="/order"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.link} ${styles.active_link}`
+                    : styles.link
+                }
+                onClick={() => setIsOpen(!isOpen)}>
+                Заказать
+              </NavLink>
             </div>
 
-            <div className={styles.buttons}>
+            {/* <div className={styles.buttons}>
               <Link
                 to="/login"
                 className={styles.button}
@@ -303,20 +219,7 @@ const Header = ({ open }) => {
                 onClick={() => setIsOpen(!isOpen)}>
                 Регистрация
               </Link>
-
-              {/* <div className={styles.account}>
-                <div className={styles.logo}>
-                  <img
-                    src="https://media.licdn.com/dms/image/D4D03AQFIgjoK1rkh6w/profile-displayphoto-shrink_800_800/0/1686734553335?e=2147483647&v=beta&t=T0y-o1tcmDImuepN3HDo_1NQ6b5ZsDznkrXsLJ71hoY"
-                    alt="User"
-                  />
-                </div>
-                <div className={styles.user}>
-                  <h3 className={styles.name}>Sherbolot</h3>
-                  <p className={styles.email}>sherbolot@wedevx.co</p>
-                </div>
-              </div> */}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

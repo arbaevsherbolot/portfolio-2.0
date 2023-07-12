@@ -36,6 +36,11 @@
       flex-direction: column;
       gap: 1.3rem;
 
+      .cupple_inputs_container {
+        display: flex;
+        gap: 1.3rem;
+      }
+
       .input_wrapper {
         position: relative;
 
