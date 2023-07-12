@@ -120,7 +120,12 @@ const Header = ({ open }) => {
         </div>
 
         <div className={styles.right}>
-          <Account />
+          <Account
+            id={1}
+            name="Sherbolot"
+            email="sherbolot@wedevx.co"
+            open={open}
+          />
 
           {/* <div className={styles.buttons}>
             <Link to="/login" className={styles.button}>
@@ -157,7 +162,12 @@ const Header = ({ open }) => {
             className={
               isOpen ? `${styles.menu} ${styles.active}` : `${styles.menu}`
             }>
-            <Account />
+            <Account
+              id={1}
+              name="Sherbolot"
+              email="sherbolot@wedevx.co"
+              open={open}
+            />
 
             <div className={styles.links}>
               <NavLink

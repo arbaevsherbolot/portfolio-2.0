@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import cart_icon from "../../assets/svg/cart.svg";
 import box_icon from "../../assets/svg/box.svg";
@@ -6,8 +6,14 @@ import user_icon from "../../assets/svg/user.svg";
 import arrow_icon from "../../assets/svg/arrow.svg";
 import styles from "./Account.module.scss";
 
-const Account = () => {
+const Account = ({ id, name, email, open }) => {
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
+
+  useEffect(() => {
+    if (!open) {
+      setIsOpenAccountMenu(false);
+    }
+  });
 
   return (
     <div
@@ -22,8 +28,8 @@ const Account = () => {
         </div>
 
         <div className={styles.user}>
-          <h3 className={styles.name}>Шерболот</h3>
-          <p className={styles.email}>sherbolot@wedevx.co</p>
+          <h3 className={styles.name}>{name}</h3>
+          <p className={styles.email}>{email}</p>
         </div>
 
         <div
@@ -37,6 +43,7 @@ const Account = () => {
       </div>
 
       <div
+        onClick={(e) => e.stopPropagation()}
         className={
           isOpenAccountMenu
             ? `${styles.account_menu} ${styles.active}`
