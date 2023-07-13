@@ -9,6 +9,26 @@ import styles from "./Account.module.scss";
 const Account = ({ id, name, email, open }) => {
   const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
 
+  const listItems = [
+    {
+      title: "Профиль",
+      path: "/profile",
+      icon: user_icon,
+    },
+    {
+      title: "Корзина",
+      path: "/cart",
+      icon: cart_icon,
+      count: 99,
+    },
+    {
+      title: "Заказы",
+      path: "/orders",
+      icon: box_icon,
+      count: 1,
+    },
+  ];
+
   useEffect(() => {
     if (!open) {
       setIsOpenAccountMenu(false);
@@ -50,35 +70,20 @@ const Account = ({ id, name, email, open }) => {
             : styles.account_menu
         }>
         <div className={styles.menu_list}>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.list_item} ${styles.active}`
-                : styles.list_item
-            }>
-            <img src={user_icon} alt="Профиль" /> Профиль
-          </NavLink>
-
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.list_item} ${styles.active}`
-                : styles.list_item
-            }>
-            <img src={cart_icon} alt="Корзина" /> Корзина <span>99+</span>
-          </NavLink>
-
-          <NavLink
-            to="/orders"
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.list_item} ${styles.active}`
-                : styles.list_item
-            }>
-            <img src={box_icon} alt="Заказы" /> Заказы <span>6+</span>
-          </NavLink>
+          {listItems.map((item, i) => (
+            <NavLink
+              key={i}
+              to={item.path}
+              onClick={() => setIsOpenAccountMenu(!isOpenAccountMenu)}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.list_item} ${styles.active}`
+                  : styles.list_item
+              }>
+              <img src={item.icon} alt={item.title} /> {item.title}{" "}
+              {item.count ? <span>{item.count}</span> : null}
+            </NavLink>
+          ))}
         </div>
 
         <div className={`${styles.button} ${styles.logout}`}>Logout</div>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-import arrow_icon from "../../../assets/svg/arrow.svg";
-import styles from "./Header.module.scss";
 import Account from "../../acoount/Account.component";
+import Dropdown from "../../dropdown/Dropdown";
+import styles from "./Header.module.scss";
 
 const Header = ({ open }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,53 @@ const Header = ({ open }) => {
       setIsOpen(false);
     }
   });
+
+  const navLinks = [
+    {
+      path: "/about",
+      title: "О компании",
+    },
+    {
+      path: "/products",
+      title: "Товары",
+    },
+    {
+      path: "/deliver",
+      title: "Доставка",
+    },
+  ];
+
+  const dropdownMenuList = [
+    {
+      path: "/order/alibaba",
+      title: "Alibaba",
+      desc: "Транснациональный конгломерат электронной коммерции",
+      tag: "НОВЫЙ",
+    },
+    {
+      path: "/order/1688",
+      title: "1688",
+      desc: "Оптовая торговая площадка Alibaba",
+    },
+    {
+      path: "/order/taobao",
+      title: "Taobao",
+      desc: "Популярная китайская платформа электронной торговли между потребителями платформа",
+    },
+    {
+      path: "/order/poizon",
+      title: "Poizon",
+      desc: "Платформы Alibaba и Poizon",
+    },
+  ];
+
+  const dropdowns = [
+    {
+      title: "Заказать",
+      menuList: dropdownMenuList,
+      tag: "",
+    },
+  ];
 
   return (
     <>
@@ -25,97 +72,26 @@ const Header = ({ open }) => {
 
         <div className={styles.middle}>
           <div className={styles.links}>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active_link}` : styles.link
-              }>
-              О компании
-            </NavLink>
+            {navLinks.map((link, i) => (
+              <NavLink
+                key={i}
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? `${styles.link} ${styles.active_link}`
+                    : styles.link
+                }>
+                {link.title}
+              </NavLink>
+            ))}
 
-            <NavLink
-              to="/products"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active_link}` : styles.link
-              }>
-              Товары
-            </NavLink>
-
-            <NavLink
-              to="/deliver"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active_link}` : styles.link
-              }>
-              Доставка
-            </NavLink>
-
-            <div className={styles.order}>
-              <div className={styles.text}>
-                Заказать
-                <div className={styles.arrow}>
-                  <img src={arrow_icon} alt=">" />
-                </div>
-              </div>
-
-              <div className={styles.dropdown}>
-                <div className={styles.menu}>
-                  <div className={styles.list}>
-                    <NavLink
-                      to="/order/alibaba"
-                      className={({ isActive }) =>
-                        isActive
-                          ? `${styles.menu_link} ${styles.active}`
-                          : styles.menu_link
-                      }>
-                      <h1 className={styles.title}>
-                        Alibaba <span>НОВЫЙ</span>
-                      </h1>
-                      <p className={styles.desc}>
-                        Транснациональный конгломерат электронной коммерции
-                      </p>
-                    </NavLink>
-
-                    <NavLink
-                      to="/order/1688"
-                      className={({ isActive }) =>
-                        isActive
-                          ? `${styles.menu_link} ${styles.active}`
-                          : styles.menu_link
-                      }>
-                      <h1 className={styles.title}>1688</h1>
-                      <p className={styles.desc}>
-                        Оптовая торговая площадка Alibaba
-                      </p>
-                    </NavLink>
-
-                    <NavLink
-                      to="/order/taobao"
-                      className={({ isActive }) =>
-                        isActive
-                          ? `${styles.menu_link} ${styles.active}`
-                          : styles.menu_link
-                      }>
-                      <h1 className={styles.title}>Taobao</h1>
-                      <p className={styles.desc}>
-                        Популярная китайская платформа электронной торговли
-                        между потребителями платформа
-                      </p>
-                    </NavLink>
-
-                    <NavLink
-                      to="/order/poizon"
-                      className={({ isActive }) =>
-                        isActive
-                          ? `${styles.menu_link} ${styles.active}`
-                          : styles.menu_link
-                      }>
-                      <h1 className={styles.title}>Poizon</h1>
-                      <p className={styles.desc}>Платформы Alibaba и Poizon</p>
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {dropdowns.map((dropdown, i) => (
+              <Dropdown
+                menuList={dropdown.menuList}
+                title={dropdown.title}
+                tag={dropdown.tag}
+              />
+            ))}
           </div>
         </div>
 
@@ -170,38 +146,18 @@ const Header = ({ open }) => {
             />
 
             <div className={styles.links}>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.link} ${styles.active_link}`
-                    : styles.link
-                }
-                onClick={() => setIsOpen(!isOpen)}>
-                О компании
-              </NavLink>
-
-              <NavLink
-                to="/products"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.link} ${styles.active_link}`
-                    : styles.link
-                }
-                onClick={() => setIsOpen(!isOpen)}>
-                Товары
-              </NavLink>
-
-              <NavLink
-                to="/deliver"
-                className={({ isActive }) =>
-                  isActive
-                    ? `${styles.link} ${styles.active_link}`
-                    : styles.link
-                }
-                onClick={() => setIsOpen(!isOpen)}>
-                Доставка
-              </NavLink>
+              {navLinks.map((link, i) => (
+                <NavLink
+                  key={i}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.link} ${styles.active_link}`
+                      : styles.link
+                  }>
+                  {link.title}
+                </NavLink>
+              ))}
 
               <NavLink
                 to="/order"
