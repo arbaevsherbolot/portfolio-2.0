@@ -56,7 +56,10 @@
     gap: 1.6rem;
 
     background-color: #fff;
-    border-radius: 0.8rem 0.8rem 0 0;
+
+    @media (min-width: 1015px) {
+      border-radius: 0.8rem 0.8rem 0 0;
+    }
 
     .top {
       display: flex;
