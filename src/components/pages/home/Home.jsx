@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../modal/ModalForm";
 import styles from "./Home.module.scss";
 
 const Home = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  // useEffect(() => {
+  //   document.title = "Вход";
+  // }, []);
 
   return (
     <>

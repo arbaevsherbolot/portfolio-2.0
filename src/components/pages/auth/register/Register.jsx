@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import google_svg from "../../../../assets/svg/google.svg";
 import show_svg from "../../../../assets/svg/show.svg";
@@ -15,7 +15,9 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  document.title = "Регистрация";
+  useEffect(() => {
+    document.title = "Регистрация";
+  }, []);
 
   const handleTogglePassword = () => {
     setTogglePassword(!togglePassword);

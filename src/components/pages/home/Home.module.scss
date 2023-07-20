@@ -9,9 +9,9 @@
   .button {
     padding: 1.25rem;
 
-    background-color: #00ffbf75;
+    background-color: #50565e;
 
-    border: 1px solid #00ffbf;
+    border: none;
     border-radius: 0.3rem;
 
     cursor: pointer;
@@ -22,16 +22,16 @@
 
     font-size: 1rem;
     font-weight: 500;
-    color: #005b44;
+    color: #fff;
 
     transition: 0.3s;
 
-    &:hover {
-      background-color: #00ffbfb9;
-    }
+    // &:hover {
+    //   background-color: #fff87c;
+    // }
 
-    &:active {
-      background-color: rgb(54, 255, 205);
-    }
+    // &:active {
+    //   background-color: #fff86b;
+    // }
   }
 }

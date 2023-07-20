@@ -104,7 +104,7 @@ const Header = ({ open }) => {
             open={open}
           />
 
-          {/* <div className={styles.buttons}>
+          <div className={styles.buttons}>
             <Link to="/login" className={styles.button}>
               Войти
             </Link>
@@ -114,7 +114,7 @@ const Header = ({ open }) => {
               className={`${styles.button} ${styles.active}`}>
               Регистрация
             </Link>
-          </div> */}
+          </div>
         </div>
 
         <div className={styles.burger_menu}>
@@ -172,7 +172,7 @@ const Header = ({ open }) => {
               </NavLink>
             </div>
 
-            {/* <div className={styles.buttons}>
+            <div className={styles.buttons}>
               <Link
                 to="/login"
                 className={styles.button}
@@ -186,7 +186,7 @@ const Header = ({ open }) => {
                 onClick={() => setIsOpen(!isOpen)}>
                 Регистрация
               </Link>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
