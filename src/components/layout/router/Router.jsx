@@ -2,8 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../../pages/home/Home";
 import Products from "../../pages/products/Products";
-import Login from "../../pages/auth/login/Login";
-import Register from "../../pages/auth/register/Register";
 import Profile from "../../pages/profile/Profile";
 
 const Router = () => {

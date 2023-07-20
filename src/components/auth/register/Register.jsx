@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import google_svg from "../../../../assets/svg/google.svg";
-import show_svg from "../../../../assets/svg/show.svg";
-import hide_svg from "../../../../assets/svg/hide.svg";
+import google_svg from "../../../assets/svg/google.svg";
+import show_svg from "../../../assets/svg/show.svg";
+import hide_svg from "../../../assets/svg/hide.svg";
 import styles from "../Form.module.scss";
 
 const Login = () => {

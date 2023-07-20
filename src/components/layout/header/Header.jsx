@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import Account from "../../account/Account.component";
-import Dropdown from "../../dropdown/Dropdown";
-import Auth from "../../pages/auth/Auth";
+import Dropdown from "../../dropdown/Dropdown.component";
+import Auth from "../../auth/Auth";
 import styles from "./Header.module.scss";
 
 const Header = ({ open }) => {

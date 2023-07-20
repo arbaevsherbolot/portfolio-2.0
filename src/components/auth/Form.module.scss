@@ -1,6 +1,11 @@
 .form {
   width: 100%;
-  max-width: 450px;
+  height: 100%;
+
+  @media (min-width: 1015px) {
+    max-width: 450px;
+    height: auto;
+  }
 
   padding: 0 1.5rem 1.5rem 1.5rem;
 
@@ -30,7 +35,7 @@
       display: flex;
       gap: 1.3rem;
 
-      @media (max-width: 465px) {
+      @media (max-width: 1015px) {
         flex-direction: column;
       }
     }
