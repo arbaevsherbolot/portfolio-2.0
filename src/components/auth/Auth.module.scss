@@ -131,6 +131,7 @@
 
         font-size: 1rem;
         font-weight: 400;
+        color: #cfd2d3;
 
         @media (max-width: 465px) {
           font-size: 0.9rem;
@@ -138,6 +139,7 @@
 
         &.active {
           position: relative;
+          color: #1e1e1e;
 
           &::after {
             content: "";
