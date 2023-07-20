@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-import Account from "../../acoount/Account.component";
+import Account from "../../account/Account.component";
 import Dropdown from "../../dropdown/Dropdown";
 import styles from "./Header.module.scss";
 
@@ -87,6 +87,7 @@ const Header = ({ open }) => {
 
             {dropdowns.map((dropdown, i) => (
               <Dropdown
+                key={i}
                 menuList={dropdown.menuList}
                 title={dropdown.title}
                 tag={dropdown.tag}
