@@ -3,10 +3,12 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import Account from "../../account/Account.component";
 import Dropdown from "../../dropdown/Dropdown";
+import Auth from "../../pages/auth/Auth";
 import styles from "./Header.module.scss";
 
 const Header = ({ open }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -105,15 +107,11 @@ const Header = ({ open }) => {
           />
 
           <div className={styles.buttons}>
-            <Link to="/login" className={styles.button}>
+            <div
+              className={`${styles.button} ${styles.active}`}
+              onClick={() => setIsOpenModal(!isOpenModal)}>
               Войти
-            </Link>
-
-            <Link
-              to="/register"
-              className={`${styles.button} ${styles.active}`}>
-              Регистрация
-            </Link>
+            </div>
           </div>
         </div>
 
@@ -173,23 +171,17 @@ const Header = ({ open }) => {
             </div>
 
             <div className={styles.buttons}>
-              <Link
-                to="/login"
-                className={styles.button}
-                onClick={() => setIsOpen(!isOpen)}>
-                Войти
-              </Link>
-
-              <Link
-                to="/register"
+              <div
                 className={`${styles.button} ${styles.active}`}
-                onClick={() => setIsOpen(!isOpen)}>
-                Регистрация
-              </Link>
+                onClick={() => setIsOpenModal(!isOpenModal)}>
+                Войти
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <Auth open={isOpenModal} />
     </>
   );
 };
