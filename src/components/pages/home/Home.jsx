@@ -5,9 +5,9 @@ import styles from "./Home.module.scss";
 const Home = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  // useEffect(() => {
-  //   document.title = "Вход";
-  // }, []);
+  useEffect(() => {
+    document.title = "ChinatradeX";
+  }, []);
 
   return (
     <>
