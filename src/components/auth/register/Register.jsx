@@ -57,9 +57,9 @@ const Login = () => {
     try {
       if (
         (data.password && data.password.length < 6) ||
-        data.password.length > 8
+        data.password.length > 18
       ) {
-        alert("Пароль должен состоять не менее чем из 6 символов");
+        alert("Пароль должен состоять не менее чем из 6 do 18 символов");
       } else if (!validateEmail(data.email)) {
         alert("Недействительный адрес электронной почты");
       } else console.log(data);
