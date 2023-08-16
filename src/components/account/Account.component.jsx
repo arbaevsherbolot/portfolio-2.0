@@ -1,62 +1,71 @@
 import React, { useState, useEffect } from "react";
+import { useAuthUser, useSignOut } from "react-auth-kit";
 import { NavLink } from "react-router-dom";
-import cart_icon from "../../assets/svg/cart.svg";
-import box_icon from "../../assets/svg/box.svg";
+import axios from "axios";
+import like_icon from "../../assets/svg/like.svg";
 import user_icon from "../../assets/svg/user.svg";
 import arrow_icon from "../../assets/svg/arrow.svg";
 import styles from "./Account.module.scss";
 
-const Account = ({ id, name, email, open }) => {
-  const [isOpenAccountMenu, setIsOpenAccountMenu] = useState(false);
+const Account = ({ open, data }) => {
+  const [isClose, setIsClose] = useState(true);
+  const close = isClose ? true : false;
+  const auth = useAuthUser();
+  const signOut = useSignOut();
+
+  const handleSignOut = async () => {
+    try {
+      await axios.patch(`http://127.0.0.1:2006/api/auth/logout/${auth().id}`);
+
+      signOut();
+      window.location.reload();
+    } catch (e) {
+      alert("Error with logging out");
+    }
+  };
 
   const listItems = [
     {
-      title: "Профиль",
+      title: "Profile",
       path: "/profile",
       icon: user_icon,
     },
     {
-      title: "Корзина",
-      path: "/cart",
-      icon: cart_icon,
-      count: 99,
-    },
-    {
-      title: "Заказы",
-      path: "/orders",
-      icon: box_icon,
-      count: 1,
+      title: "Likes",
+      path: "/likes",
+      icon: like_icon,
+      count: data.likes,
     },
   ];
 
   useEffect(() => {
     if (!open) {
-      setIsOpenAccountMenu(false);
+      setIsClose(true);
     }
   });
 
-  return (
-    <div
-      className={styles.account}
-      onClick={() => setIsOpenAccountMenu(!isOpenAccountMenu)}>
+  return data ? (
+    <div className={styles.account} onClick={() => setIsClose(!isClose)}>
       <div className={styles.account_data}>
         <div className={styles.logo}>
           <img
-            src="https://media.licdn.com/dms/image/D4D03AQFIgjoK1rkh6w/profile-displayphoto-shrink_800_800/0/1686734553335?e=2147483647&v=beta&t=T0y-o1tcmDImuepN3HDo_1NQ6b5ZsDznkrXsLJ71hoY"
+            src={
+              data.photo
+                ? `http://127.0.0.1:2006/static/${data.photo}`
+                : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+            }
             alt="User"
           />
         </div>
 
         <div className={styles.user}>
-          <h3 className={styles.name}>{name}</h3>
-          <p className={styles.email}>{email}</p>
+          <h3 className={styles.name}>{data.firstName}</h3>
+          <p className={styles.email}>{data.email}</p>
         </div>
 
         <div
           className={
-            isOpenAccountMenu
-              ? `${styles.arrow} ${styles.active}`
-              : styles.arrow
+            !close ? `${styles.arrow} ${styles.active}` : styles.arrow
           }>
           <img src={arrow_icon} alt=">" />
         </div>
@@ -65,7 +74,7 @@ const Account = ({ id, name, email, open }) => {
       <div
         onClick={(e) => e.stopPropagation()}
         className={
-          isOpenAccountMenu
+          !close
             ? `${styles.account_menu} ${styles.active}`
             : styles.account_menu
         }>
@@ -80,16 +89,20 @@ const Account = ({ id, name, email, open }) => {
                   ? `${styles.list_item} ${styles.active}`
                   : styles.list_item
               }>
-              <img src={item.icon} alt={item.title} /> {item.title}{" "}
+              <img src={item.icon} alt={item.title} /> {item.title}
               {item.count ? <span>{item.count}</span> : null}
             </NavLink>
           ))}
         </div>
 
-        <div className={`${styles.button} ${styles.logout}`}>Logout</div>
+        <div
+          className={`${styles.button} ${styles.logout}`}
+          onClick={handleSignOut}>
+          Logout
+        </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Account;

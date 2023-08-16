@@ -1,37 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Bebas+Neue:regular);
+
 .page_wrapper {
-  width: 100%;
-  height: 200vh;
+  width: 100vw;
+  max-width: 1200px;
+  height: 300vh;
+
+  // background-color: #fff;
 
   gap: 0.8rem;
 
-  padding: 1rem;
+  padding: 0 1.5rem;
 
-  .button {
-    padding: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background-color: #50565e;
+  .content {
+    width: 100%;
 
-    border: none;
-    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    cursor: pointer;
+    position: relative;
 
-    @media (max-width: 815px) {
-      cursor: default;
+    background: url("https://wallpaperaccess.com/full/7205167.png") center/cover
+      no-repeat fixed;
+
+    .title {
+      color: #fff;
+      font-size: 19rem;
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 900;
     }
 
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
+    .man {
+      width: 500px;
 
-    transition: 0.3s;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      z-index: 1;
 
-    // &:hover {
-    //   background-color: #fff87c;
-    // }
-
-    // &:active {
-    //   background-color: #fff86b;
-    // }
+      transform: translateX(-50%);
+    }
   }
 }

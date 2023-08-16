@@ -23,14 +23,13 @@ const Dropdown = ({ menuList, title, tag }) => {
                   to={listItem.path}
                   className={({ isActive }) =>
                     isActive
-                      ? `${styles.menu_link} ${styles.active}`
-                      : styles.menu_link
+                      ? `${styles.listItem} ${styles.active}`
+                      : styles.listItem
                   }>
                   <h1 className={styles.title}>
                     {listItem.title}
                     {listItem.tag ? <span>{listItem.tag}</span> : null}
                   </h1>
-                  <p className={styles.desc}>{listItem.desc}</p>
                 </NavLink>
               ))}
             </div>

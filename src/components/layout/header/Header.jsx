@@ -1,63 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import logo from "../../../assets/logo.png";
+import { useAuthUser } from "react-auth-kit";
 import Account from "../../account/Account.component";
 import Dropdown from "../../dropdown/Dropdown.component";
-import Auth from "../../auth/Auth";
+import Modal from "../../modal/Modal";
+import logo from "../../../assets/logo.png";
+import logo_blog from "../../../assets/blog-logo.png";
 import styles from "./Header.module.scss";
 
-const Header = ({ open }) => {
+const Header = ({ open, data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModalResume, setIsOpenModalResume] = useState(false);
+  const auth = useAuthUser();
 
   useEffect(() => {
     if (!open) {
       setIsOpen(false);
+      setIsOpenModal(false);
     }
   });
 
   const navLinks = [
     {
       path: "/about",
-      title: "О компании",
+      title: "About",
     },
     {
-      path: "/products",
-      title: "Товары",
+      path: "/projects",
+      title: "Projects",
     },
     {
-      path: "/deliver",
-      title: "Доставка",
+      path: "/skills",
+      title: "Skills",
     },
   ];
 
   const dropdownMenuList = [
     {
+      id: 1,
       path: "/order/alibaba",
-      title: "Alibaba",
-      desc: "Транснациональный конгломерат электронной коммерции",
-      tag: "НОВЫЙ",
+      title: "Quick View",
+      tag: "",
     },
     {
-      path: "/order/1688",
-      title: "1688",
-      desc: "Оптовая торговая площадка Alibaba",
-    },
-    {
+      id: 2,
       path: "/order/taobao",
-      title: "Taobao",
-      desc: "Популярная китайская платформа электронной торговли между потребителями платформа",
-    },
-    {
-      path: "/order/poizon",
-      title: "Poizon",
-      desc: "Платформы Alibaba и Poizon",
+      title: "Download",
+      tag: "PDF",
     },
   ];
 
   const dropdowns = [
     {
-      title: "Заказать",
+      title: "Resume",
       menuList: dropdownMenuList,
       tag: "",
     },
@@ -68,7 +64,7 @@ const Header = ({ open }) => {
       <div className={styles.navbar}>
         <Link to="/">
           <div className={styles.logo}>
-            <img src={logo} alt="Logo" />
+            <img src={auth() ? logo_blog : logo} alt="Logo" />
           </div>
         </Link>
 
@@ -87,30 +83,34 @@ const Header = ({ open }) => {
               </NavLink>
             ))}
 
-            {dropdowns.map((dropdown, i) => (
-              <Dropdown
-                key={i}
-                menuList={dropdown.menuList}
-                title={dropdown.title}
-                tag={dropdown.tag}
-              />
-            ))}
+            {/* {dropdowns.map((dropdown, i) => (
+            <Dropdown
+              key={i}
+              menuList={dropdown.menuList}
+              title={dropdown.title}
+              tag={dropdown.tag}
+            />
+          ))} */}
+
+            <NavLink
+              to="/blog"
+              onClick={() => setIsOpenModal(!isOpenModal)}
+              className={({ isActive }) =>
+                isActive ? `${styles.link} ${styles.active_link}` : styles.link
+              }>
+              Blog
+            </NavLink>
           </div>
         </div>
 
         <div className={styles.right}>
-          <Account
-            id={1}
-            name="Sherbolot"
-            email="sherbolot@wedevx.co"
-            open={open}
-          />
+          {auth() ? <Account data={data} open={open} /> : null}
 
           <div className={styles.buttons}>
             <div
-              className={`${styles.button} ${styles.active}`}
-              onClick={() => setIsOpenModal(!isOpenModal)}>
-              Войти
+              className={styles.button}
+              onClick={() => setIsOpenModalResume(!isOpenModalResume)}>
+              Resume
             </div>
           </div>
         </div>
@@ -137,13 +137,7 @@ const Header = ({ open }) => {
             className={
               isOpen ? `${styles.menu} ${styles.active}` : `${styles.menu}`
             }>
-            <Account
-              id={1}
-              name="Sherbolot"
-              email="sherbolot@wedevx.co"
-              open={open}
-            />
-
+            {auth() ? <Account data={data} open={open} /> : null}
             <div className={styles.links}>
               {navLinks.map((link, i) => (
                 <NavLink
@@ -159,29 +153,28 @@ const Header = ({ open }) => {
               ))}
 
               <NavLink
-                to="/order"
+                to="/blog"
                 className={({ isActive }) =>
                   isActive
-                    ? `${styles.link} ${styles.button} ${styles.active_link}`
-                    : `${styles.link} ${styles.button}`
-                }
-                onClick={() => setIsOpen(!isOpen)}>
-                Заказать
+                    ? `${styles.link} ${styles.active_link}`
+                    : styles.link
+                }>
+                Blog
               </NavLink>
             </div>
 
             <div className={styles.buttons}>
               <div
-                className={`${styles.button} ${styles.active}`}
-                onClick={() => setIsOpenModal(!isOpenModal)}>
-                Войти
+                className={styles.button}
+                onClick={() => setIsOpenModalResume(!isOpenModalResume)}>
+                Resume
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <Auth open={isOpenModal} />
+      <Modal open={isOpenModalResume} />
     </>
   );
 };
